@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+
+<style>
+* {
+  box-sizing: border-box;
+}
+
+html {
+    font-family: "Lucida Sans", sans-serif;
+}
+
+body {
+    background-image: url(https://cdn.hipwallpaper.com/i/99/99/ArBn8h.jpg); 
+    background-size: cover;
+    background-repeat: no-repeat;
+    margin: 0;
+    background-color: rgb(16, 16, 71);
+}
+
+.header {
+    font-size: 36px;
+    text-align: center;
+    color: #ffffff;
+    padding: 1px;
+}
+
+.labels {
+    font-size: 14px;
+    color: white;
+    text-align:center;
+    height:auto;
+}
+
+</style>
+
+<script>
+    function PresionArterial(){
+        var Peso=parseFloat(document.DatosPresion.Peso.value)
+        var Altura=parseFloat(document.DatosPresion.Altura.value)
+        var Ps=parseFloat(document.DatosPresion.Psis.value)
+        var Pd=parseFloat(document.DatosPresion.Pdis.value)
+        
+        var IMC=Peso/(Altura*Altura)
+        IMC = IMC.toFixed(3);
+        if (IMC <=18.5) {
+            St=document.getElementById("IMCSt")
+            St.innerHTML="Bajo Peso"
+        }
+        else if ((IMC>18.5)&&(IMC <25)){
+            St=document.getElementById("IMCSt")
+            St.innerHTML="Normal"
+        }
+        else if ((IMC>25)&&(IMC <30)){
+            St=document.getElementById("IMCSt")
+            St.innerHTML="Sobre Peso"
+        }
+        else if ((IMC>30)&&(IMC <35)){
+            St=document.getElementById("IMCSt")
+            St.innerHTML="Obesidad I"
+        }
+        else if ((IMC>35)&&(IMC <40)){
+            St=document.getElementById("IMCSt")
+            St.innerHTML="Obesidad II"
+        }  
+        else if ((IMC>40)&&(IMC <50)){
+            St=document.getElementById("IMCSt")
+            St.innerHTML="Obesidad III"
+        } 
+        else if (IMC>50){
+            St=document.getElementById("IMCSt")
+            St.innerHTML="Obesidad IV"
+        }   
+    
+        Imcv=document.getElementById("IMC")
+        Imcv.innerHTML=IMC
+        var PAM=(Ps+(2*Pd))/3
+        if ((Ps>180)&&(Pd>120)) {
+            if (document.DatosPresion.DO.value=="Cerebro"){
+                CHT=document.getElementById("CHTSt")
+                CHT.innerHTML="Emergencia"
+                CHTF1=document.getElementById("CHTF1")
+                CHTF1.innerHTML="Debe inyectar Labetalol para disminuir en 15% su Presion Arterial Media"
+                CHTPAM1=document.getElementById("CHTPAM1")
+                CHTPAM1.innerHTML="Su Presion Arterial Media es:"
+                CHTPAM2=document.getElementById("CHTPAM2")
+                CHTPAM2.innerHTML=PAM
+                HT=document.getElementById("HTSt")
+                HT.innerHTML=''
+                HTF1=document.getElementById("HTF1")
+                HTF1.innerHTML=''
+            }
+            else if (document.DatosPresion.DO.value=="Riñon"){
+                CHT=document.getElementById("CHTSt")
+                CHT.innerHTML="Emergencia"
+                CHTF1=document.getElementById("CHTF1")
+                CHTF1.innerHTML="Debe inyectar Nitroprusiato de sodio para disminuir en 20% su Presion Arterial Media"
+                CHTPAM1=document.getElementById("CHTPAM1")
+                CHTPAM1.innerHTML="Su Presion Arterial Media es:"
+                CHTPAM2=document.getElementById("CHTPAM2")
+                CHTPAM2.innerHTML=PAM
+                HT=document.getElementById("HTSt")
+                HT.innerHTML=''
+                HTF1=document.getElementById("HTF1")
+                HTF1.innerHTML=''
+            }
+            else if (document.DatosPresion.DO.value=="Corazon"){
+                CHT=document.getElementById("CHTSt")
+                CHT.innerHTML="Emergencia"
+                CHTF1=document.getElementById("CHTF1")
+                CHTF1.innerHTML="Debe inyectar Nitroglicerina para disminuir en 20% su Presion Arterial Media"
+                CHTPAM1=document.getElementById("CHTPAM1")
+                CHTPAM1.innerHTML="Su Presion Arterial Media es:"
+                CHTPAM2=document.getElementById("CHTPAM2")
+                CHTPAM2.innerHTML=PAM
+                HT=document.getElementById("HTSt")
+                HT.innerHTML=''
+                HTF1=document.getElementById("HTF1")
+                HTF1.innerHTML=''
+            }
+            else if ((document.DatosPresion.DO.value=="No")||(document.DatosPresion.DO.value=='')){
+                if ((document.DatosPresion.C.value=="No")||(document.DatosPresion.C.value=='')){
+                    if ((document.DatosPresion.M.value=="No")||(document.DatosPresion.M.value=='')){
+                        if ((document.DatosPresion.A.value=="No")||(document.DatosPresion.A.value=='')){
+                     
+                            CHT=document.getElementById("CHTSt")
+                            CHT.innerHTML="Urgencia"
+                            CHTF1=document.getElementById("CHTF1")
+                            CHTF1.innerHTML="Debe tomar 5mg de Enalapril"
+                            HT=document.getElementById("HTSt")
+                            HT.innerHTML=''
+                            HTF1=document.getElementById("HTF1")
+                            HTF1.innerHTML=''
+                        }
+                    }
+                }
+            }
+        }
+        
+        if ((document.DatosPresion.C.value=="Si")&&(document.DatosPresion.M.value=="Si")&&(document.DatosPresion.A.value=="Si")){
+            if ((Ps>=140)&&(Ps<=159)&&(Pd>=90)&&(Pd<=99)) {
+                HT=document.getElementById("HTSt")
+                HT.innerHTML="Grado 1"
+                HTF1=document.getElementById("HTF1")
+                HTF1.innerHTML="Debe tomar 5mg de Enalapril"
+                CHT=document.getElementById("CHTSt")
+                CHT.innerHTML='No'
+                CHTF1=document.getElementById("CHTF1")
+                CHTF1.innerHTML=''
+                CHTPAM1=document.getElementById("CHTPAM1")
+                CHTPAM1.innerHTML=''
+                CHTPAM2=document.getElementById("CHTPAM2")
+                CHTPAM2.innerHTML=''
+            }
+            else if ((Ps>=160)&&(Ps<=179)&&(Pd>=100)&&(Pd<=109)) {
+                HT=document.getElementById("HTSt")
+                HT.innerHTML="Grado 2"
+                HTF1=document.getElementById("HTF1")
+                HTF1.innerHTML="Debe tomar 10mg de Enalapril"
+                CHT=document.getElementById("CHTSt")
+                CHT.innerHTML='No'
+                CHTF1=document.getElementById("CHTF1")
+                CHTF1.innerHTML=''
+                CHTPAM1=document.getElementById("CHTPAM1")
+                CHTPAM1.innerHTML=''
+                CHTPAM2=document.getElementById("CHTPAM2")
+                CHTPAM2.innerHTML=''
+            }
+            else if ((Ps>=180)&&(Pd>=110)) {
+                HT=document.getElementById("HTSt")
+                HT.innerHTML="Grado 3"
+                HTF1=document.getElementById("HTF1")
+                HTF1.innerHTML="Debe tomar 20mg de Losartan"
+                CHT=document.getElementById("CHTSt")
+                CHT.innerHTML='No'
+                CHTF1=document.getElementById("CHTF1")
+                CHTF1.innerHTML=''
+                CHTPAM1=document.getElementById("CHTPAM1")
+                CHTPAM1.innerHTML=''
+                CHTPAM2=document.getElementById("CHTPAM2")
+                CHTPAM2.innerHTML=''
+            }      
+            else if ((Ps>=140)&&(Pd<=90)) {
+                HT=document.getElementById("HTSt")
+                HT.innerHTML="Grado 4"
+                HTF1=document.getElementById("HTF1")
+                HTF1.innerHTML="Debe tomar 40mg de Losartan"
+                CHT=document.getElementById("CHTSt")
+                CHT.innerHTML='No'
+                CHTF1=document.getElementById("CHTF1")
+                CHTF1.innerHTML=''
+                CHTPAM1=document.getElementById("CHTPAM1")
+                CHTPAM1.innerHTML=''
+                CHTPAM2=document.getElementById("CHTPAM2")
+                CHTPAM2.innerHTML=''
+            }
+        }
+        
+    }
+</script>
+
+</head>
+
+<body>
+
+<div class="header">
+  <h1>MEDICAL CARE</h1>
+</div>
+
+<Form  name="DatosPresion">
+
+    <div style="width: 50%; float: left; padding: 25px; text-align: center">
+        <label class="labels">Peso</label>
+    </div>
+        
+    <div style="width: 50%; float: left; padding: 25px; text-align: center">
+        <input type="text" name="Peso" size="1" style="width:50px; height:20px" >
+    </div>
+        
+    <div style="width: 50%; float: left; padding: 25px; text-align: center">
+        <label class="labels">Altura</label>
+    </div>
+        
+    <div style="width: 50%; float: left; padding: 25px; text-align: center">
+        <input type="text" name="Altura" size="1" style="width:50px; height:20px">
+    </div>
+                    
+    <div style="width: 50%; float: left; padding: 25px; text-align: center">            
+        <label class="labels">Presion sistolica</label>
+    </div>
+
+    <div style="width: 50%; float: left; padding: 25px; text-align: center">
+        <input type="text" name="Psis" size="1" style="width:50px; height:20px">
+    </div>
+    
+    <div style="width: 50%; float: left; padding: 25px; text-align: center">
+        <label class="labels">Presion distolica</label>
+    </div>
+        
+    <div style="width: 50%; float: left; padding: 25px; text-align: center">
+        <input type="text" name="Pdis" size="1" style="width:50px; height:20px">    
+    </div>    
+    
+    <div style="width: 50%; float: left; padding: 25px; text-align: center">    
+        <label class="labels">Dolor de cabeza</label>
+    </div> 
+    
+    <div style="width: 50%; float: left; padding: 25px; text-align: center">
+        <input type="text" name="C" size="1" style="width:50px; height:20px">
+    </div> 
+    
+    <div style="width: 50%; float: left; padding: 25px; text-align: center">
+        <label class="labels">Mareos</label>
+    </div> 
+
+    <div style="width: 50%; float: left; padding: 25px; text-align: center">
+        <input type="text" name="M" size="1" style="width:50px; height:20px">       
+    </div> 
+
+    <div style="width: 50%; float: left; padding: 25px; text-align: center;">
+        <label class="labels">Adormecimiento C</label>
+    </div> 
+
+    <div style="width: 50%; float: left; padding: 25px; text-align: center">
+        <input type="text" name="A" size="1" style="width:50px; height:20px">
+    </div> 
+
+    <div style="width: 50%; float: left; padding: 25px; text-align: center; ">
+        <label class="labels">Organo afectado</label>
+    </div>
+    
+    <div style="width: 50%; float: left; padding: 25px; text-align: center">
+        <input type="text" name="DO" size="1" style="width:50px; height:20px">
+    </div>     
+    
+    <div style="width: 100%; float: left; padding:25px; text-align: center">
+        <input type="button" class="btn btn-info" value="Calcular" onclick="PresionArterial()">
+    </div>     
+        
+    <div style="width: 30%; float: left; padding: 25px; text-align: center">
+        <label style="font-size: 45; color: white; text-align:center;">IMC</label>
+    </div>
+        
+    <div style="width: 40%; float: left; padding: 25px; text-align: center">
+        <label id="IMC" class="labels" style="font-size: 20; color: rgb(255, 0, 0); ">--------</label>
+    </div>
+        
+    <div style="width: 30%; float: left; padding: 25px; text-align: center">
+        <label id="IMCSt" style="font-size: 20; color: rgb(255, 0, 0); ">--------</label>
+    </div>
+    
+    <div style="width: 100%; float: left; padding: 25px; text-align: center">
+        <label style="font-size: 45; color: white; text-align:center;">Hipertension</label>
+    </div>
+    
+    <div style="width: 50%; float: left; padding: 25px; text-align: center">
+        <label id="HTSt" style="font-size: 20; color: rgb(255, 0, 0); text-align:center;"></label>
+    </div>
+    
+    <div style="width: 50%; float: left; padding: 25px; text-align: center">
+        <label id="HTF1" style="font-size: 20; color: rgb(255, 0, 0); text-align:center;"></label>
+    </div>
+
+    <div style="width: 50%; float: left; padding: 25px; text-align: center">
+        <label style="font-size: 45; color: white; text-align:center;">Crisis Hipertensiva</label>
+    </div>
+
+    <div style="width: 50%; float: left; padding: 25px; text-align: center">
+        <label id="CHTSt" style="font-size: 20; color: rgb(255, 0, 0); text-align:center;"></label>
+    </div>
+
+    <div style="width: 100%; float: left; padding: 25px; text-align: center">
+        <label id="CHTF1" style="font-size: 20; color: rgb(255, 0, 0); text-align:center;"></label>
+    </div>
+
+    <div style="width: 50%; float: left; padding: 25px; text-align: center">
+        <label id="CHTPAM1" style="font-size: 20; color: white; text-align:center;"></label>
+    </div>
+
+    <div style="width: 50%; float: left; padding: 25px; text-align: center">
+        <label id="CHTPAM2" style="font-size: 20; color: rgb(255, 0, 0); text-align:center;"></label>
+    </div>
+
+</Form>
+
+</body>
+</html>
